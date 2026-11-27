@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dr. Iram Noreen · RAIV Robotics, AI & Vision</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;600;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<style>
+:root{
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#F2F5F7;--surface:#FFFFFF;--ink:#13222D;--muted:#52636F;--line:#D3DCE2;--teal:#0B6B6F;--path:#D9480F;--tint:#E3EEEF;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0E1A22;--surface:#142530;--ink:#E6EEF2;--muted:#9DB0BC;--line:#26404F;--teal:#5CC4C8;--path:#FF8A57;--tint:#17323B;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0E1A22;--surface:#142530;--ink:#E6EEF2;--muted:#9DB0BC;--line:#26404F;--teal:#5CC4C8;--path:#FF8A57;--tint:#17323B;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Source Serif 4",Georgia,serif}
+a{color:var(--teal)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--path);outline-offset:2px}
+h1,h2,h3,.sans{font-family:"Schibsted Grotesk",system-ui,sans-serif}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;gap:6px 22px;align-items:center;overflow-x:auto;padding-top:12px;padding-bottom:12px}
+nav b{font:800 1.05rem "Schibsted Grotesk",sans-serif;margin-right:auto;white-space:nowrap}
+nav a{font:600 .92rem "Schibsted Grotesk",sans-serif;text-decoration:none;color:var(--muted);white-space:nowrap}
+nav a:hover{color:var(--ink)}
+.hero{display:grid;grid-template-columns:1.05fr 1fr;gap:36px;align-items:center;padding:56px 0 44px}
+.hero h1{font-size:clamp(2.3rem,5.5vw,3.9rem);line-height:1.02;margin:0 0 6px;font-weight:800;letter-spacing:-.02em}
+.role{font:600 1.1rem "Schibsted Grotesk",sans-serif;color:var(--teal);margin:0 0 14px}
+.hero p{margin:0 0 14px;max-width:52ch}
+.btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.btn{font:600 .93rem "Schibsted Grotesk",sans-serif;padding:9px 16px;border-radius:6px;border:1.5px solid var(--ink);color:var(--ink);text-decoration:none}
+.btn.p{background:var(--ink);color:var(--bg)}
+.viz{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:8px}
+.viz svg{display:block;width:100%;height:auto}
+.viz figcaption{font:.82rem "Schibsted Grotesk",sans-serif;color:var(--muted);padding:6px 8px 4px}
+.tree{stroke:var(--teal);stroke-width:1.2;opacity:.55;fill:none}
+.obs{fill:var(--tint);stroke:var(--line)}
+.route{stroke:var(--path);stroke-width:3.5;fill:none;stroke-linecap:round;stroke-dasharray:900;stroke-dashoffset:900;animation:draw 3.2s .4s ease-out forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){.route{animation:none;stroke-dashoffset:0}html{scroll-behavior:auto}}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:10px;background:var(--surface);overflow:hidden}
+.stats div{padding:16px 18px;border-right:1px solid var(--line)}
+.stats div:last-child{border:0}
+.stats strong{display:block;font:800 1.8rem "Schibsted Grotesk",sans-serif}
+.stats span{font:.88rem "Schibsted Grotesk",sans-serif;color:var(--muted)}
+section{padding:60px 0 8px}
+h2{font-size:1.8rem;margin:0 0 6px;letter-spacing:-.01em}
+.lede{color:var(--muted);max-width:62ch;margin:0 0 26px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px}
+.card h3{margin:0 0 6px;font-size:1.08rem}
+.card p{margin:0;font-size:.97rem;color:var(--muted)}
+.theme{border-left:4px solid var(--teal)}
+.theme:nth-child(2){border-color:var(--path)}
+.person h3{margin-bottom:2px}
+.person .tag{font:600 .85rem "Schibsted Grotesk",sans-serif;color:var(--teal)}
+.avatar{width:46px;height:46px;border-radius:50%;background:var(--tint);color:var(--teal);display:grid;place-items:center;font:800 1rem "Schibsted Grotesk",sans-serif;margin-bottom:12px}
+.tl{list-style:none;margin:0;padding:0;border-left:2px solid var(--line)}
+.tl li{position:relative;padding:0 0 22px 26px}
+.tl li::before{content:"";position:absolute;left:-7px;top:9px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:3px solid var(--teal)}
+.tl li.now::before{background:var(--path);border-color:var(--path)}
+.tl .when{font:600 .85rem "Schibsted Grotesk",sans-serif;color:var(--muted)}
+.tl h3{margin:0;font-size:1.05rem}
+.tl p{margin:2px 0 0;font-size:.96rem;color:var(--muted)}
+.inst{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:28px}
+.inst>div>h3{font-size:1.25rem;margin:0 0 2px}
+.inst>div>.sub{font:600 .86rem "Schibsted Grotesk",sans-serif;color:var(--muted);margin:0 0 18px}
+.pubs{list-style:none;margin:0;padding:0}
+.pubs li{padding:14px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:64px 1fr;gap:12px}
+.pubs .y{font:800 1rem "Schibsted Grotesk",sans-serif;color:var(--teal)}
+.pubs em{color:var(--muted);font-size:.93rem}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:28px}
+.two ul{margin:0;padding-left:1.1em}
+.two li{margin-bottom:8px}
+.two h3{margin:0 0 10px;font-size:1.15rem}
+footer{margin-top:70px;border-top:1px solid var(--line);padding:30px 0 40px;color:var(--muted);font-size:.95rem}
+footer .wrap{display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between}
+@media(max-width:800px){.hero{grid-template-columns:1fr;padding-top:32px}.stats{grid-template-columns:1fr 1fr}.stats div:nth-child(2){border-right:0}.stats div:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <b>Iram Noreen</b>
+  <a href="#raiv">RAIV group</a><a href="#team">PhD team</a><a href="#career">Career</a><a href="#admin">Teaching &amp; admin</a><a href="#pubs">Publications</a><a href="#contact">Contact</a>
+</div></nav>
+
+<main class="wrap">
+<header class="hero" id="top">
+  <div>
+    <h1>Dr. Iram Noreen</h1>
+    <p class="role">Professor &amp; Cluster Head, Computer Science</p>
+    <p>Bahria University Lahore Campus (BULC). I lead <strong>RAIV: Robotics, AI &amp; Vision</strong>, a research group working on how robots plan paths, how machines see, and how deep learning can be made useful in medicine and security.</p>
+    <p>My PhD (COMSATS, HEC scholarship, with a research fellowship at Korea University, Seoul) produced the path planner <strong>RRT*-AB</strong>. Twenty years of teaching and research have followed.</p>
+    <div class="btns">
+      <a class="btn p" href="#raiv">Explore RAIV</a>
+      <a class="btn" href="https://scholar.google.com/citations?user=hrGhovkAAAAJ&amp;hl=en">Google Scholar</a>
+      <a class="btn" href="https://www.linkedin.com/in/dr-iramnoreen/">LinkedIn</a>
+    </div>
+  </div>
+  <figure class="viz" style="margin:0" aria-label="Diagram of a tree-based path planner finding a smooth route around obstacles">
+    <svg viewBox="0 0 480 340" role="img" aria-hidden="true">
+      <rect class="obs" x="120" y="40" width="70" height="120" rx="8"/>
+      <rect class="obs" x="230" y="170" width="80" height="130" rx="8"/>
+      <rect class="obs" x="330" y="30" width="60" height="100" rx="8"/>
+      <g class="tree">
+        <path d="M40 290L90 240L96 190M90 240L150 250L205 215M96 190L100 130L80 80M100 130L150 190L205 215M205 215L215 150L270 120M205 215L250 160M270 120L300 70L305 30M270 120L330 160L370 190M330 160L345 215L380 260M370 190L430 160L440 100M370 190L420 230M300 70L355 60M215 150L190 100M150 250L180 300M40 290L60 320M90 240L40 200M205 215L180 280M430 160L455 200"/>
+      </g>
+      <path class="route" d="M40 290C70 255 80 215 100 180S160 205 205 215S260 130 300 110S400 190 440 100"/>
+      <circle cx="40" cy="290" r="7" fill="var(--teal)"/><circle cx="440" cy="100" r="7" fill="var(--path)"/>
+    </svg>
+    <figcaption>A tree explores the free space; a smooth B-spline route (orange) is traced from start to goal.</figcaption>
+  </figure>
+</header>
+
+<div class="stats" aria-label="Summary figures">
+  <div><strong>20+</strong><span>years in academia &amp; industry</span></div>
+  <div><strong>30</strong><span>publications (21 journal, 9 conference)</span></div>
+  <div><strong>1,523</strong><span>Google Scholar citations</span></div>
+  <div><strong>4</strong><span>PhD scholars supervised in RAIV</span></div>
+</div>
+
+<section id="raiv">
+  <h2>RAIV: Robotics, AI &amp; Vision</h2>
+  <p class="lede">RAIV continues the Computer Vision and Robotics (CVR) group at Bahria University Lahore Campus and builds on work begun in the VIG &amp; Robotics centre at COMSATS Lahore. We work on problems where a machine must perceive, decide and move.</p>
+  <div class="grid">
+    <div class="card theme"><h3>Robot path planning</h3><p>Optimal and collision-free paths for non-holonomic mobile robots: RRT*-AB, memory-efficient A*, coverage planning, and B-spline smoothing. Funded by an HEC-SRGP grant.</p></div>
+    <div class="card theme"><h3>Deep reinforcement learning for navigation</h3><p>Collision avoidance for robots in unknown environments, published in PLOS ONE (2025).</p></div>
+    <div class="card theme"><h3>Medical image analysis</h3><p>Alzheimer's and mild cognitive impairment detection, tumour diagnosis, and retinal exudate detection with deep and transfer learning.</p></div>
+    <div class="card theme"><h3>Video forensics &amp; security</h3><p>Forged-video and duplicate-frame detection, and deepfake prevention using steganography GANs.</p></div>
+    <div class="card theme"><h3>Vision &amp; applied AI</h3><p>Hand-pose recognition, plant-disease detection, elderly-care robots, and churn prediction.</p></div>
+  </div>
+</section>
+
+<section id="team">
+  <h2>PhD scholars</h2>
+  <p class="lede">Four doctoral researchers currently work under Dr. Noreen's supervision in RAIV.</p>
+  <div class="grid">
+    <div class="card person"><div class="avatar" aria-hidden="true">ZF</div><h3>Zoobia Fatima</h3><span class="tag">PhD scholar</span><p>Deep learning for Alzheimer's and cognitive-impairment detection. Co-author of papers on architecture optimisation and MCI diagnosis.</p></div>
+    <div class="card person"><div class="avatar" aria-hidden="true">MT</div><h3>Muhammad Tajamal</h3><span class="tag">PhD scholar</span><p>Research focus to be added.</p></div>
+    <div class="card person"><div class="avatar" aria-hidden="true">AS</div><h3>Ayesha Sher Ali</h3><span class="tag">PhD scholar</span><p>Research focus to be added.</p></div>
+    <div class="card person"><div class="avatar" aria-hidden="true">NF</div><h3>Noor Fatima</h3><span class="tag">PhD scholar</span><p>Research focus to be added.</p></div>
+  </div>
+  <p style="margin-top:18px;color:var(--muted);font-size:.95rem">Dr. Noreen has also supervised many MS theses in AI, computer vision, machine learning, deep learning and robotics, plus IGNITE-funded projects and the 2019 Microsoft Imagine Cup runner-up project.</p>
+</section>
+
+<section id="career">
+  <h2>Academic career</h2>
+  <p class="lede">Positions at the three institutions where Dr. Noreen has taught and researched, with her Korea University fellowship and early industry work.</p>
+  <div class="inst">
+    <div>
+      <h3>Bahria University, Lahore Campus</h3><p class="sub">2018 to present</p>
+      <ul class="tl">
+        <li class="now"><span class="when">Jan 2025 to present</span><h3>Professor &amp; Cluster Head, Computer Science</h3></li>
+        <li><span class="when">2024 to 2025</span><h3>Senior Associate Professor &amp; Cluster Head</h3></li>
+        <li><span class="when">2022 to 2023</span><h3>Associate Professor &amp; Cluster Head</h3></li>
+        <li><span class="when">Aug 2018 to 2021</span><h3>Senior Assistant Professor</h3></li>
+      </ul>
+    </div>
+    <div>
+      <h3>COMSATS University</h3><p class="sub">Lahore Campus, 2014 to 2017</p>
+      <ul class="tl">
+        <li><span class="when">Sep 2014 to Feb 2017</span><h3>Doctoral Researcher (NRPU)</h3><p>PhD in Computer Science under an HEC scholarship, in the Vision, Image, Graphics &amp; Robotics centre. Won the COMSATS Research Productivity Award.</p></li>
+        <li><span class="when">Feb to Aug 2016</span><h3>Visiting Doctoral Researcher, Korea University</h3><p>Perceptual Robotics Lab, Department of Engineering, Seoul.</p></li>
+      </ul>
+    </div>
+    <div>
+      <h3>The University of Lahore</h3><p class="sub">2011 to 2018</p>
+      <ul class="tl">
+        <li><span class="when">Aug 2011 to Jul 2018</span><h3>Lecturer and Assistant Professor</h3><p>Department of Computer Science. BSCS (Gold Medal) earned here.</p></li>
+      </ul>
+    </div>
+  </div>
+  <p style="color:var(--muted);font-size:.95rem">Earlier: Lecturer at Soophia College (2010 to 2011); Programmer at Internet Landrush, California (2005 to 2008); Lecturer at Lahore College for Women University (2005 to 2006), where she also earned her MSCS (Silver Medal); Programmer at Abacus Tech, Lahore (2003 to 2004).</p>
+</section>
+
+<section id="admin">
+  <h2>Teaching &amp; administration</h2>
+  <div class="two">
+    <div>
+      <h3>Administrative &amp; leadership</h3>
+      <ul>
+        <li>Cluster Head, Computer Science, Bahria University Lahore Campus, since 2022; member of several departmental and university committees.</li>
+        <li>Incharge, Computer Vision and Robotics (CVR) research group, BULC.</li>
+        <li>Founded the Intro to Robotics Lab at BULC.</li>
+        <li>Guest CTO at meshfreaks LLC (UAE), summer programmes 2025 to 2026; seasonal AI consultant to SiddiqueStudios (UAE).</li>
+        <li>Guest Editor, JICTRA (HEC-recognised), 2022 to 2023.</li>
+        <li>Panel judge at DICE, SOFTEC and EnsoFEST software competitions.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Teaching (undergraduate &amp; postgraduate)</h3>
+      <ul>
+        <li>Robotics, Artificial Intelligence, Machine Learning, Deep Learning</li>
+        <li>Computer Vision, Digital Image Processing, Neural Networks &amp; Fuzzy Logic</li>
+        <li>Design and Analysis of Algorithms, Automata, Object-Oriented Programming, Java Software Development</li>
+      </ul>
+      <h3 style="margin-top:22px">Recognition</h3>
+      <ul>
+        <li>Distinguished Teaching Award, Bahria University, 2022</li>
+        <li>Appreciation letters for outstanding PER, 2020 and 2021</li>
+        <li>HEC PhD scholarship, HEC travel grant (London), COMSATS Research Productivity Award</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Service to the research community</h3>
+      <ul>
+        <li>Reviewer: Autonomous Robots, IEEE Access, Applied Soft Computing, Scientific Reports, The Journal of Supercomputing, Frontiers in AI, and others.</li>
+        <li>Conference reviewer: ICACS25, FIT16 to FIT25.</li>
+        <li>Member: IACSIT (Senior), ISAC, IAENG.</li>
+        <li>Guest talks and workshops at universities and the Naval War College.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Training &amp; certification</h3>
+      <ul>
+        <li>HEC National Faculty Development Program (NFDP) Tier-II; HEC research boot camp.</li>
+        <li>IBM Skills Network on Coursera: AI, Python, Deep Learning with Keras, Generative AI agents.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="pubs">
+  <h2>Selected publications</h2>
+  <p class="lede">Thirty in total. The full list is on <a href="https://scholar.google.com/citations?user=hrGhovkAAAAJ&amp;hl=en">Google Scholar</a>.</p>
+  <ul class="pubs">
+    <li><span class="y">2026</span><div>Z. Fatima, I. Noreen. A novel architecture optimization using deep learning for Alzheimer's multiclass disease detection. <em>JICTRA.</em> <a href="https://jictra.com.pk/index.php/jictra/article/view/360">Link</a></div></li>
+    <li><span class="y">2025</span><div>Alharthi, Noreen, Khan, Aljrees, Riaz, Innab. Novel deep reinforcement learning based collision avoidance for path planning of robots in unknown environments. <em>PLOS ONE.</em> <a href="https://doi.org/10.1371/journal.pone.0312559">DOI</a></div></li>
+    <li><span class="y">2023</span><div>Munawar, Noreen. Forged video detection using deep learning: a systematic literature review. <em>Applied Computational Intelligence and Soft Computing.</em> <a href="https://doi.org/10.1155/2023/6661192">DOI</a></div></li>
+    <li><span class="y">2022</span><div>Noreen, Muneer, Gillani. Deepfake attack prevention using steganography GANs. <em>PeerJ Computer Science.</em> <a href="https://doi.org/10.7717/peerj-cs.1125">DOI</a></div></li>
+    <li><span class="y">2021</span><div>Noreen, Hamid, Akram. Hand pose recognition using parallel multi-stream CNN. <em>Sensors.</em> <a href="https://doi.org/10.3390/s21248469">DOI</a></div></li>
+    <li><span class="y">2020</span><div>Noreen. Collision-free smooth path for mobile robots in cluttered environments using an economical clamped cubic B-spline. <em>Symmetry.</em> <a href="https://doi.org/10.3390/sym12091567">DOI</a></div></li>
+    <li><span class="y">2019</span><div>Noreen, Khan, Ryu, Doh, Habib. A path-planning performance comparison of RRT*-AB with MEA* in a 2-dimensional environment. <em>Symmetry.</em> <a href="https://doi.org/10.3390/sym11070945">DOI</a></div></li>
+    <li><span class="y">2018</span><div>Noreen, Khan, Ryu, Doh, Habib. Optimal path planning in cluttered environment using RRT*-AB. <em>Intelligent Service Robotics.</em> <a href="http://dx.doi.org/10.1007/s11370-017-0236-7">DOI</a></div></li>
+    <li><span class="y">2016</span><div>Noreen, Khan, Habib. Optimal path planning using RRT*-based approaches: a survey and future directions. <em>IJACSA.</em></div></li>
+  </ul>
+  <p style="color:var(--muted);font-size:.95rem">Research funding: HEC-SRGP grant (PKR 0.5 million, Principal Investigator), “Energy efficient collision free path smoothing for mobile robots using clamped cubic B-spline.”</p>
+</section>
+
+<section id="contact">
+  <h2>Contact</h2>
+  <div class="card" style="max-width:560px">
+    <p style="color:var(--ink)"><strong>Dr. Iram Noreen</strong><br>Department of Computer Science, Bahria University Lahore Campus<br>
+    <a href="mailto:iram.bulc@bahria.edu.pk">iram.bulc@bahria.edu.pk</a><br><a href="mailto:iramnoreen@gmail.com">iramnoreen@gmail.com</a></p>
+    <p style="margin-top:10px"><a href="https://www.linkedin.com/in/dr-iramnoreen/">LinkedIn</a> · <a href="https://scholar.google.com/citations?user=hrGhovkAAAAJ&amp;hl=en">Google Scholar</a></p>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap"><span>RAIV: Robotics, AI &amp; Vision · Bahria University Lahore Campus</span><a href="#top">Back to top</a></div></footer>
+</body>
+</html>
